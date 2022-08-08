@@ -1,7 +1,11 @@
 import cv2
 import pytesseract
 
-def encontrarRoiPlaca(source):
+
+pytesseract.pytesseract.tesseract_cmd = "C:\\Users\\gustavo\\AppData\\Local\\Tesseract-OCR\\tesseract.exe"
+
+
+def encontrarRoiDynaMapa(source):
     img = cv2.imread(source)
     cv2.imshow("img", img)
 
@@ -30,7 +34,7 @@ def encontrarRoiPlaca(source):
     cv2.imshow("contornos", img)
 
 
-def preProcessamentoRoiPlaca():
+def preProcessamentoRoiDynaMapa():
     img_roi = cv2.imread("output/roi.png")
 
     if img_roi is None:
@@ -58,7 +62,7 @@ def preProcessamentoRoiPlaca():
     return img_desfoque
 
 
-def ocrImageRoiPlaca():
+def ocrImageRoiDynaMapa():
     image = cv2.imread("output/roi-ocr.png")
 
     config = r'-c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 --psm 6'
@@ -69,10 +73,10 @@ def ocrImageRoiPlaca():
 
 
 if __name__ == "__main__":
-    encontrarRoiPlaca("resource/carro4.jpg")
+    encontrarRoiDynaMapa("imagens/imagem_05.jpg")
 
-    pre = preProcessamentoRoiPlaca()
+    pre = preProcessamentoRoiDynaMapa()
 
-    ocr = ocrImageRoiPlaca()
+    ocr = ocrImageRoiDynaMapa()
 
     print(ocr)
